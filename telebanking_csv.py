@@ -9,6 +9,7 @@ from tkinter import ttk
 
 # globals:
 csv_lines = []
+csv_file_encoding = 'ISO-8859-1'
 
 
 '''
@@ -53,9 +54,9 @@ categories = {
     'XX': '--'
 };
 
-categories_inverse = {v: k for k, v in categories.items()} 
+categories_inverse = {v: k for k, v in categories.items()}
 
-# important set locale because amounts in CSV are like '1.234,56' 
+# important set locale because amounts in CSV are like '1.234,56'
 locale.setlocale(locale.LC_ALL, 'de_DE.utf8')
 
 
@@ -94,7 +95,7 @@ def defaultKeyForUmsatzText(t):
     elif 'billa' in t or 'bipa' in t or 'spar dankt' in t:
         return 'EK'
     elif 'caritas' in t:
-        return 'SP'		
+        return 'SP'
     else:
         return 'XX'
 
@@ -133,7 +134,7 @@ class Application(ttk.Frame):
                 category_selections.append(val)
                 combo = ttk.Combobox(self.table, values=list(categories.values()), textvariable=val)
                 combo.grid(row=i, column=jj, sticky='W')
-                
+
         self.buttons_frame = ttk.Frame(self)
         self.buttons_frame.pack(side='top')
         self.button1 = ttk.Button(self.buttons_frame, text="Test", command=self.button1_clicked)
@@ -143,7 +144,7 @@ class Application(ttk.Frame):
         summary = calculate_summary()
         print_summary(summary)
         print_for_copypaste(summary)
-            
+
 def calculate_summary():
     for v in category_selections:
         print(v.get())
@@ -181,26 +182,26 @@ def f2s(f):
 
 def read_csv(csv_file_name):
     print(f'Start processing \'{csv_file_name}\'')
-    with open(csv_file_name, newline='') as  csvfile:
+    with open(csv_file_name, newline='', encoding=csv_file_encoding) as  csvfile:
         reader = csv.reader(csvfile, delimiter = ';' )
         for row in reader:
             csv_lines.append(row)
-    
+
 def print_csv_lines():
     n_lines = len(csv_lines);
     ii=0
     for line in csv_lines:
         print("", ii, ":", line)
-        ii += 1                  
-        
-        
+        ii += 1
+
+
 # main:
 # ToDo consider to use 'argparse'
 csv_file_name = 'umsaetze0.csv'
-##if (len(sys.argv) < 2):
-##    print("Usage:" + __name__ + " <csv_file_name>")
-##    exit()
-##csv_file_name = sys.argv[1]
+if (len(sys.argv) < 2):
+    print("Usage:" + __name__ + " <csv_file_name>")
+    exit()
+csv_file_name = sys.argv[1]
 read_csv(csv_file_name)
 print('---------------------------------------------------')
 print_csv_lines()
