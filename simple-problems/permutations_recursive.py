@@ -1,3 +1,6 @@
+# generate permutations
+# source: https://mathsanew.com/articles/permutations_with_recursion.pdf
+
 n = 3
 a = list(range(1, n+1))
 print(a)
