@@ -13,16 +13,12 @@ def generate(s):
     for i in range(n-s):
         if i > 0:
             # SWAP(s,s+i)
-            t = a[s+i]
-            a[s+i] = a[s]
-            a[s] = t
+            a[s], a[s+i] = a[s+i], a[s]
         generate(s+1)
 
         if i > 0:
             # SWAP(s, s+i)
-            t = a[s]
-            a[s] = a[s+i]
-            a[s+i] = t
+            a[s], a[s+i] = a[s+i], a[s]
             
 
 generate(0)
