@@ -1,8 +1,15 @@
 # generate permutations
 # source: https://mathsanew.com/articles/permutations_with_recursion.pdf
 
-n = 3
+import sys
+
+if len(sys.argv) > 1:
+    n = int(sys.argv[1])
+else:
+    n = 3
+
 a = list(range(1, n+1))
+print('All permutations of')
 print(a)
 print('---')
 
