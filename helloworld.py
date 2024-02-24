@@ -1,10 +1,17 @@
 import sys
 import getopt
 
-opts, args = getopt.getopt(sys.argv, "?")
+def run():
+    print('Hello world. dummy edit')
+    print(add(3, 5))
+
+   
 
 def add(a, b):
     return a + b
 
-print('Hello world. dummy edit')
-print(add(3, 5))
+
+if __name__ == '__main__':
+    opts, args = getopt.getopt(sys.argv, "?")
+    print(__name__)
+    run()
